@@ -1,0 +1,140 @@
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #100e0c;
+  --color-panel: #1c1712;
+  --color-vellum: #f3eadb;
+  --color-muted: #b7a890;
+  --color-gold: #c6a15a;
+  --color-cinnabar: #9a3b2f;
+  --font-display: "Cormorant Garamond", Palatino, "Palatino Linotype", serif;
+  --font-ui: Outfit, "Avenir Next", "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-vellum);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-ink);
+    background-image:
+      radial-gradient(ellipse 120% 70% at 50% -18%, color-mix(in oklab, var(--color-gold) 20%, transparent), transparent 54%),
+      radial-gradient(ellipse 48% 36% at 100% 100%, color-mix(in oklab, var(--color-cinnabar) 18%, transparent), transparent 60%),
+      url("/cover/void.jpg");
+    background-repeat: no-repeat;
+    background-size: auto, auto, cover;
+    background-position: center top;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+.safe-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.plate-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+}
+
+.cover-board {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  width: min(100%, 26rem);
+  margin-inline: auto;
+  box-shadow: 0 24px 60px color-mix(in oklab, var(--color-ink) 70%, black);
+}
+
+.cover-board img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cover-letter {
+  position: absolute;
+  inset: 28% 16% 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cover-letter h1 {
+  margin-top: 0.35rem;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 0.92;
+  color: var(--color-vellum);
+}
+
+.codex-range {
+  appearance: none;
+  height: 2px;
+  width: 100%;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-gold) 35%, var(--color-ink));
+  accent-color: var(--color-gold);
+}
+
+.codex-range::-webkit-slider-thumb {
+  appearance: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+  background: var(--color-gold);
+}
+
+.leaf-in {
+  animation: rise 240ms ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf-in {
+    animation: none;
+  }
+}
